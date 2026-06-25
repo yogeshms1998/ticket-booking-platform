@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
    success: true,
 
    message:
-     "Smart Task API Running"
+     "Ticket Booking Platform API Running"
 
  });
 
