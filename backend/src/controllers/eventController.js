@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const Event = require("../models/Event");
 
 // Create Event
@@ -17,6 +18,14 @@ exports.createEvent = async (req, res) => {
 // Get All Events
 exports.getAllEvents = async (req, res) => {
   try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(200).json({
+        success: true,
+        count: 0,
+        events: [],
+      });
+    }
+
     const events = await Event.find();
 
     res.status(200).json({

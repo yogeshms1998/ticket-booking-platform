@@ -7,9 +7,7 @@ const {
   getEventById,
 } = require("../controllers/eventController");
 
-const {
-  protect,
-} = require("../middleware/authMiddleware");
+const authMiddleware = require("../middleware/authMiddleware");
 
 const roleMiddleware = require("../middleware/roleMiddleware");
 
@@ -21,7 +19,7 @@ router.get("/:id", getEventById);
 // Admin Route
 router.post(
   "/",
-  protect,
+  authMiddleware,
   roleMiddleware("admin"),
   createEvent
 );
