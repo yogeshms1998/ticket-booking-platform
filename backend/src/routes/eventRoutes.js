@@ -15,7 +15,7 @@ const roleMiddleware = require("../middleware/roleMiddleware");
 
 
 // Public Routes
-router.get("/", getAllEvents);
+router.get("/events", getAllEvents);
 router.get("/:id", getEventById);
 
 // Admin Route
