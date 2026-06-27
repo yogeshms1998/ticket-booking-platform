@@ -1,0 +1,218 @@
+.page {
+  padding: 28px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - 160px);
+  color: #111827;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.hero-panel {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.hero-copy h1 {
+  margin: 0 0 16px;
+  font-size: clamp(2.25rem, 2vw + 1rem, 3rem);
+  color: #111827;
+}
+
+.hero-copy p,
+.feature-card p,
+.ticket-card p,
+.profile-card p {
+  color: #4b5563;
+  line-height: 1.7;
+}
+
+.button-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.button,
+.button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.button {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.button-secondary {
+  background: #eef2ff;
+  color: #1d4ed8;
+}
+
+.hero-support {
+  display: grid;
+  gap: 18px;
+}
+
+.feature-card,
+.ticket-card,
+.auth-card,
+.profile-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.06);
+}
+
+.feature-card h2,
+.ticket-card h3,
+.auth-card h1,
+.profile-card h1 {
+  margin: 0 0 10px;
+}
+
+.auth-card,
+.profile-card {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.auth-card form {
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.auth-card label {
+  display: grid;
+  gap: 8px;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.4;
+}
+
+.auth-card input {
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 1rem;
+  color: #111827 !important;
+  background-color: #ffffff !important;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  -webkit-text-fill-color: #111827 !important;
+  appearance: none;
+  box-sizing: border-box;
+  text-shadow: none;
+}
+
+.auth-card input::placeholder {
+  color: #9ca3af;
+  -webkit-text-fill-color: #9ca3af;
+}
+
+.auth-card input:-webkit-autofill,
+.auth-card input:-webkit-autofill:hover,
+.auth-card input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+  -webkit-text-fill-color: #111827;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.auth-card input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.form-error {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 12px 14px;
+  border-radius: 10px;
+}
+
+.alert-message {
+  margin-top: 24px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: #ecfdf5;
+  color: #166534;
+}
+
+.form-footnote {
+  margin-top: 18px;
+  color: #475569;
+}
+
+.grid-list {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.ticket-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.ticket-card-body {
+  min-height: 120px;
+}
+
+.ticket-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  color: #6b7280;
+}
+
+.ticket-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.profile-card {
+  display: grid;
+  gap: 18px;
+}
+
+.field-label {
+  color: #6b7280;
+  margin-bottom: 4px;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 860px) {
+  .hero-panel {
+    grid-template-columns: 1fr;
+  }
+}
