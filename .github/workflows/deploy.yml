@@ -1,0 +1,89 @@
+name: Ticket Booking Platform CI-CD
+
+on:
+ 
+ push:
+    branches:
+      - main
+
+pull_request:
+    branches:
+      - main
+    
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+  defaults:
+   run:
+    working-directory: frontend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build react app
+        run: npm run build
+
+      - name: configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: deploy frontend to S3
+        run: aws s3 sync build/ s3://ticket-booking-platform-frontend --delete
+
+backend-build:
+
+   runs-on: ubuntu-latest
+
+   defaults:
+     run:
+       working-directory: backend
+
+   steps:
+
+     - name: Checkout Code
+       uses: actions/checkout@v4
+
+     - name: Configure AWS
+       uses: aws-actions/configure-aws-credentials@v4
+       with:
+
+         aws-access-key-id:
+           ${{ secrets.AWS_ACCESS_KEY_ID }}
+
+         aws-secret-access-key:
+           ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+         aws-region:
+           ${{ secrets.AWS_REGION }}
+
+     - name: Login ECR
+       id: login-ecr
+
+       uses:
+         aws-actions/amazon-ecr-login@v2
+
+      - name: Build Docker image
+        run: |
+          docker build -t ticket-booking-platform-backend .
+
+      - name: Tag Docker image
+        run: |
+         docker tag ticket-booking-platform-backend:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/ticket-booking-platform-backend:latest
+
+      - name: Push Docker image to ECR
+        run: |
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/ticket-booking-platform-backend:latest
+          

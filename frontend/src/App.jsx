@@ -6,6 +6,7 @@ import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import Bookings from './pages/Bookings.jsx'
+import CreateEvent from './pages/CreateEvent.jsx'
 import Profile from './pages/Profile.jsx'
 import './App.css'
 
@@ -30,6 +31,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Bookings />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="create-event"
+            element={
+              <ProtectedRoute adminOnly>
+                <CreateEvent />
               </ProtectedRoute>
             }
           />

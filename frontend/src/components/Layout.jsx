@@ -5,6 +5,8 @@ import './Layout.css'
 function Layout() {
   const navigate = useNavigate()
   const isLogged = Boolean(localStorage.getItem('authToken'))
+  const currentUser = JSON.parse(localStorage.getItem('authUser') || 'null')
+  const isAdmin = currentUser?.role === 'admin'
 
   const handleLogout = () => {
     authService.logout()
@@ -23,6 +25,7 @@ function Layout() {
             <>
               <NavLink to="/dashboard">Dashboard</NavLink>
               <NavLink to="/bookings">My Bookings</NavLink>
+              {isAdmin && <NavLink to="/create-event">Create Event</NavLink>}
               <NavLink to="/profile">Profile</NavLink>
               <button className="button button-link" onClick={handleLogout}>
                 Logout

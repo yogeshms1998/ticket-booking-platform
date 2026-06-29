@@ -5,14 +5,14 @@ function TicketCard({ ticket, actionLabel, onAction }) {
         <h3>{ticket.title}</h3>
         <p>{ticket.description}</p>
         <div className="ticket-meta">
-          <span>{ticket.date}</span>
-          <span>{ticket.location}</span>
+          <span>{new Date(ticket.date).toLocaleDateString()}</span>
+          <span>{ticket.venue}</span>
         </div>
       </div>
       <div className="ticket-card-actions">
         <strong>{ticket.price ? `$${ticket.price}` : 'Free'}</strong>
         {actionLabel && (
-          <button className="button button-secondary" onClick={() => onAction(ticket.id)}>
+          <button className="button button-secondary" onClick={() => onAction(ticket._id || ticket.id)}>
             {actionLabel}
           </button>
         )}

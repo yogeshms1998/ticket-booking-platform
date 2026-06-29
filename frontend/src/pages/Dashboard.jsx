@@ -51,7 +51,7 @@ function Dashboard() {
         <div className="grid-list">
           {tickets.map((ticket) => (
             <TicketCard
-              key={ticket.id}
+              key={ticket._id || ticket.id}
               ticket={ticket}
               actionLabel="Book now"
               onAction={handleBook}
