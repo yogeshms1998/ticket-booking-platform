@@ -14,9 +14,9 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
-  defaults:
-   run:
-    working-directory: frontend
+    defaults:
+      run:
+        working-directory: frontend
 
     steps:
       - name: Checkout code
@@ -41,39 +41,29 @@ jobs:
           aws-region: us-east-1
 
       - name: deploy frontend to S3
-        run: aws s3 sync build/ s3://ticket-booking-platform-frontend --delete
+        run: aws s3 sync dist/ s3://ticket-booking-platform-frontend --delete
 
-backend-build:
+  backend-build:
+    runs-on: ubuntu-latest
 
-   runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
 
-   defaults:
-     run:
-       working-directory: backend
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-   steps:
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
-     - name: Checkout Code
-       uses: actions/checkout@v4
-
-     - name: Configure AWS
-       uses: aws-actions/configure-aws-credentials@v4
-       with:
-
-         aws-access-key-id:
-           ${{ secrets.AWS_ACCESS_KEY_ID }}
-
-         aws-secret-access-key:
-           ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
-         aws-region:
-           ${{ secrets.AWS_REGION }}
-
-     - name: Login ECR
-       id: login-ecr
-
-       uses:
-         aws-actions/amazon-ecr-login@v2
+      - name: Login ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build Docker image
         run: |
@@ -81,9 +71,7 @@ backend-build:
 
       - name: Tag Docker image
         run: |
-         docker tag ticket-booking-platform-backend:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/ticket-booking-platform-backend:latest
-
+          docker tag ticket-booking-platform-backend:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/ticket-booking-platform-backend:latest
       - name: Push Docker image to ECR
         run: |
           docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/ticket-booking-platform-backend:latest
-          
