@@ -124,3 +124,38 @@ input[type='submit']:hover {
     padding: 12px;
   }
 }
+
+/* Basic hero and CTA styles for Home page */
+.hero-panel { display: block; margin-bottom: 16px; }
+.hero-copy h1 { margin: 0 0 12px; font-size: 1.6rem; color: #111; }
+.hero-copy p { color: #333; line-height: 1.6; }
+.home-cta { margin-top: 12px; color: #222; }
+
+/* Ensure auth headers and input text are visible */
+.auth-card h1,
+.profile-card h1 {
+  color: #111;
+}
+
+.auth-card input,
+.profile-card input,
+.auth-card textarea,
+.profile-card textarea,
+select {
+  color: #111;
+  background: #fff;
+}
+
+.auth-card input::placeholder,
+.profile-card input::placeholder {
+  color: #666;
+}
+
+/* Improve contrast for focused inputs */
+.auth-card input:focus,
+.profile-card input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid rgba(0,0,0,0.08);
+  background: #fff;
+}
