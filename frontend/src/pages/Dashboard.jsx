@@ -38,8 +38,17 @@ function Dashboard() {
     <main className="page page-dashboard">
       <div className="page-header">
         <div>
-          <p className="eyebrow">Dashboard</p>
-          <h1>Available Tickets</h1>
+          <p className="eyebrow">Ticket Booking Platform</p>
+          <h1>Book your next event in minutes</h1>
+          <p>
+            Search shows, reserve seats, and manage bookings from a modern ticket booking dashboard.
+          </p>
+        </div>
+      </div>
+
+      <div className="page-header">
+        <div>
+          <p className="eyebrow">Available Tickets</p>
         </div>
       </div>
 

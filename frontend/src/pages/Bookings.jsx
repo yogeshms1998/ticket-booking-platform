@@ -12,7 +12,13 @@ function Bookings() {
     const loadBookings = async () => {
       try {
         const data = await ticketService.getMyBookings()
-        setBookings(data)
+        // Transform bookings to include event details at root level
+        const transformedBookings = data.map((booking) => ({
+          ...booking,
+          ...booking.eventId,
+          id: booking._id,
+        }))
+        setBookings(transformedBookings)
       } catch (err) {
         setError('Unable to load your bookings.')
       } finally {
